@@ -1,0 +1,21 @@
+name: upayments_sdk_example
+description: Example application for upayments_sdk.
+publish_to: 'none'
+
+environment:
+  sdk: ^3.12.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  upayments_sdk:
+    path: ..
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
