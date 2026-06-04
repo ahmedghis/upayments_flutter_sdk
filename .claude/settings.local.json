@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(Remove-Item \"c:\\\\Flutter\\\\Projects\\\\Flutter_SDK\\\\upayments_flutter_sdk\\\\lib\\\\main.dart\")"
+      "Bash(Remove-Item \"c:\\\\Flutter\\\\Projects\\\\Flutter_SDK\\\\upayments_flutter_sdk\\\\lib\\\\main.dart\")",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git tag *)",
+      "Bash(git push *)"
     ]
   }
 }
