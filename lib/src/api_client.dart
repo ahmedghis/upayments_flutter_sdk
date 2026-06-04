@@ -15,6 +15,7 @@ class ApiClient {
   String get _authorizationHeader => 'ApiKey ${config.apiKey}';
 
   Map<String, String> get _defaultHeaders => {
+        'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Authorization': _authorizationHeader,
       };

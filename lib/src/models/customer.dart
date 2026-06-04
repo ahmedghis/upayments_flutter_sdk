@@ -1,23 +1,26 @@
 class Customer {
+  final String? uniqueId;
   final String? name;
   final String? email;
-  final String? phone;
+  final String? mobile;
 
-  Customer({this.name, this.email, this.phone});
+  Customer({this.uniqueId, this.name, this.email, this.mobile});
 
   factory Customer.fromJson(Map<String, dynamic> json) {
     return Customer(
+      uniqueId: json['uniqueId']?.toString(),
       name: json['name']?.toString(),
       email: json['email']?.toString(),
-      phone: json['phone']?.toString(),
+      mobile: json['mobile']?.toString(),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
+      if (uniqueId != null) 'uniqueId': uniqueId,
       if (name != null) 'name': name,
       if (email != null) 'email': email,
-      if (phone != null) 'phone': phone,
+      if (mobile != null) 'mobile': mobile,
     };
   }
 }

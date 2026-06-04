@@ -1,30 +1,35 @@
 class Product {
-  final String id;
-  final String? name;
-  final int? quantity;
-  final int? price;
+  final String name;
+  final String? description;
+  final double price;
+  final int quantity;
 
-  Product({required this.id, this.name, this.quantity, this.price});
+  Product({
+    required this.name,
+    this.description,
+    required this.price,
+    required this.quantity,
+  });
 
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
-      id: json['id']?.toString() ?? '',
-      name: json['name']?.toString(),
+      name: json['name']?.toString() ?? '',
+      description: json['description']?.toString(),
+      price: json['price'] is num
+          ? (json['price'] as num).toDouble()
+          : double.tryParse(json['price']?.toString() ?? '') ?? 0.0,
       quantity: json['quantity'] is int
           ? json['quantity'] as int
-          : int.tryParse(json['quantity']?.toString() ?? ''),
-      price: json['price'] is int
-          ? json['price'] as int
-          : int.tryParse(json['price']?.toString() ?? ''),
+          : int.tryParse(json['quantity']?.toString() ?? '') ?? 0,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
-      if (name != null) 'name': name,
-      if (quantity != null) 'quantity': quantity,
-      if (price != null) 'price': price,
+      'name': name,
+      if (description != null) 'description': description,
+      'price': price,
+      'quantity': quantity,
     };
   }
 }

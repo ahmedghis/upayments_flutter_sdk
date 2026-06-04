@@ -57,9 +57,11 @@ void main() {
 
     final response = await client.charge.createCharge(
       ChargeRequest(
-        amount: 1000,
-        currency: 'USD',
         notificationUrl: 'https://example.com/webhook',
+        returnUrl: 'https://example.com/success',
+        cancelUrl: 'https://example.com/cancel',
+        order: Order(id: 'order_001', currency: 'KWD', amount: 10.00),
+        products: [Product(name: 'Test Item', price: 10.00, quantity: 1)],
       ),
     );
 
@@ -287,8 +289,6 @@ void main() {
     expect(
       () => client.charge.createCharge(
         ChargeRequest(
-          amount: 1000,
-          currency: 'USD',
           notificationUrl: 'https://example.com/webhook',
         ),
       ),

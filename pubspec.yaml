@@ -1,6 +1,6 @@
 name: upayments_sdk
 description: "UPayments Flutter SDK for UInterfaceV2 payment gateway."
-version: 1.0.0
+version: 1.1.0
 homepage: https://github.com/ahmedghis/upayments_flutter_sdk
 publish_to: 'none'
 

@@ -4,8 +4,6 @@ import 'product.dart';
 import 'payment_gateway.dart';
 
 class ChargeRequest {
-  final int amount;
-  final String currency;
   final String notificationUrl;
   final String? returnUrl;
   final String? cancelUrl;
@@ -13,11 +11,11 @@ class ChargeRequest {
   final Order? order;
   final List<Product>? products;
   final PaymentGateway? paymentGateway;
-  final String? customerUniqueToken;
+  final String? language;
+  final String? referenceId;
+  final String? customerExtraData;
 
   ChargeRequest({
-    required this.amount,
-    required this.currency,
     required this.notificationUrl,
     this.returnUrl,
     this.cancelUrl,
@@ -25,13 +23,13 @@ class ChargeRequest {
     this.order,
     this.products,
     this.paymentGateway,
-    this.customerUniqueToken,
+    this.language,
+    this.referenceId,
+    this.customerExtraData,
   });
 
   factory ChargeRequest.fromJson(Map<String, dynamic> json) {
     return ChargeRequest(
-      amount: json['amount'] as int,
-      currency: json['currency']?.toString() ?? '',
       notificationUrl: json['notificationUrl']?.toString() ?? '',
       returnUrl: json['returnUrl']?.toString(),
       cancelUrl: json['cancelUrl']?.toString(),
@@ -49,24 +47,25 @@ class ChargeRequest {
       paymentGateway: json['paymentGateway'] != null
           ? PaymentGateway.fromJson(json['paymentGateway'] as Map<String, dynamic>)
           : null,
-      customerUniqueToken: json['customerUniqueToken']?.toString(),
+      language: json['language']?.toString(),
+      referenceId: (json['reference'] as Map<String, dynamic>?)?['id']?.toString(),
+      customerExtraData: json['customerExtraData']?.toString(),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'amount': amount,
-      'currency': currency,
-      'notificationUrl': notificationUrl,
+      if (products != null)
+        'products': products!.map((p) => p.toJson()).toList(),
+      if (order != null) 'order': order!.toJson(),
+      if (language != null) 'language': language,
+      if (referenceId != null) 'reference': {'id': referenceId},
+      if (customer != null) 'customer': customer!.toJson(),
       if (returnUrl != null) 'returnUrl': returnUrl,
       if (cancelUrl != null) 'cancelUrl': cancelUrl,
-      if (customer != null) 'customer': customer!.toJson(),
-      if (order != null) 'order': order!.toJson(),
-      if (products != null)
-        'products': products!.map((product) => product.toJson()).toList(),
+      'notificationUrl': notificationUrl,
+      if (customerExtraData != null) 'customerExtraData': customerExtraData,
       if (paymentGateway != null) 'paymentGateway': paymentGateway!.toJson(),
-      if (customerUniqueToken != null)
-        'customerUniqueToken': customerUniqueToken,
     };
   }
 }

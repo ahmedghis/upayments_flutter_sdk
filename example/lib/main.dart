@@ -46,24 +46,32 @@ class _ExampleHomePageState extends State<ExampleHomePage> {
     });
 
     final chargeRequest = ChargeRequest(
-      amount: 1000,
-      currency: 'USD',
       notificationUrl: 'https://example.com/notification',
       returnUrl: 'https://example.com/return',
       cancelUrl: 'https://example.com/cancel',
+      language: 'en',
       customer: Customer(
+        uniqueId: '9223372036854755',
         name: 'Test Customer',
         email: 'customer@example.com',
-        phone: '+1234567890',
+        mobile: '+96512345678',
       ),
       order: Order(
         id: 'order_12345',
-        amount: 1000,
-        currency: 'USD',
+        reference: 'REF-001',
+        description: 'Demo purchase',
+        currency: 'KWD',
+        amount: 10.00,
       ),
       products: [
-        Product(id: 'prod_1', name: 'Demo Item', quantity: 1, price: 1000),
+        Product(
+          name: 'Demo Item',
+          description: 'A sample product',
+          price: 10.00,
+          quantity: 1,
+        ),
       ],
+      referenceId: 'ref_12345',
     );
 
     try {
